@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/Login.tsx";
 import Admin from "../pages/Admin.tsx";
 import "./App.css";
-import Nav from "../pages/Nav.tsx"
+
 
 function App() {
   return (
