@@ -1,19 +1,20 @@
-    import { BrowserRouter, Routes, Route } from "react-router-dom";
-    import Login from "../pages/Login.tsx";
-    import Admin from "../pages/Admin.tsx";
-    import Signin from "../pages/Signin.tsx";
-    import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Appgame from '../pages/App.game.tsx'
+import Register from "../pages/register.tsx"
+import "./App.css";
+import Guest from "../pages/Guest.tsx";
+import Login from "../pages/Login.tsx"
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Appgame/>} />
+        <Route path="/Register" element={<Register/>} />
+        <Route path="/Guest" element={<Guest />} />
+        <Route path="/Login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
-    function App() {
-      return (
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/Admin" element={<Admin />} />
-            <Route path="/Signin" element={<Signin />} />
-          </Routes>
-        </BrowserRouter>
-      );
-    }
-
-    export default App;
+export default App;
