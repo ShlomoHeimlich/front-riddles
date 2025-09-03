@@ -1,0 +1,11 @@
+#menuappgame {
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    padding: 20px; 
+    gap: 10px; 
+}
+
+#menuappgame h1{
+    color: blue;
+}
