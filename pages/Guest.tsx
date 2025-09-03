@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import "../style/Guest.css"
 interface Question {
   id: number;
   riddle: string;
@@ -46,16 +46,17 @@ export default function Guest() {
   const currentQuestion = questions[currentIndex];
 
   return (
-    <div>
-      <div>{currentQuestion.riddle}</div>
+    <div id="Guest">
+        <div className="Question">השאלה</div>
+      <div className="Question">{currentQuestion.riddle}</div>
       <input
         type="text"
         value={userAnswer}
         onChange={(e) => setUserAnswer(e.target.value)}
         placeholder="הכנס את התשובה שלך כאן"
       />
-      <button onClick={checkAnswer}>שלח</button>
-      <div>
+      <button  onClick={checkAnswer}>שלח</button>
+      <div >
         שאלה {currentIndex + 1} מתוך {questions.length}
       </div>
     </div>
