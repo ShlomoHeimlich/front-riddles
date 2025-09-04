@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import "../style/Guest.css"
+import "../style/Guest.css";
+
 interface Question {
   id: number;
   riddle: string;
@@ -7,6 +8,8 @@ interface Question {
 }
 
 export default function Guest() {
+  const [startTime] = useState(new Date());
+  const [endTime, setEndTime] = useState<Date | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
@@ -32,7 +35,6 @@ export default function Guest() {
     if (!currentQuestion) return;
 
     if (userAnswer.trim() === currentQuestion.correctAnswer) {
-      alert("נכון!");
       setUserAnswer("");
       setCurrentIndex((prev) => prev + 1);
     } else {
@@ -40,14 +42,31 @@ export default function Guest() {
     }
   };
 
+  useEffect(() => {
+    if (currentIndex >= questions.length && questions.length > 0 && !endTime) {
+      setEndTime(new Date());
+    }
+  }, [currentIndex, questions.length, endTime]);
+
   if (loading) return <div>טוען...</div>;
-  if (currentIndex >= questions.length) return <div>סיימת את כל השאלות!</div>;
+  if (currentIndex >= questions.length) {
+    const durationSeconds = endTime
+      ? Math.floor((endTime.getTime() - startTime.getTime()) / 1000)
+      : 0;
+
+    return (
+      <div>
+        <div>סיימת את כל השאלות!</div>
+        <div>משך זמן: {durationSeconds} שניות</div>
+      </div>
+    );
+  }
 
   const currentQuestion = questions[currentIndex];
 
   return (
     <div id="Guest">
-        <div className="Question">השאלה</div>
+      <div className="Question">השאלה</div>
       <div className="Question">{currentQuestion.riddle}</div>
       <input
         type="text"
@@ -55,8 +74,8 @@ export default function Guest() {
         onChange={(e) => setUserAnswer(e.target.value)}
         placeholder="הכנס את התשובה שלך כאן"
       />
-      <button  onClick={checkAnswer}>שלח</button>
-      <div >
+      <button onClick={checkAnswer}>שלח</button>
+      <div>
         שאלה {currentIndex + 1} מתוך {questions.length}
       </div>
     </div>

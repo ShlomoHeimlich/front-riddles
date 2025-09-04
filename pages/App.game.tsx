@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-
 import "../style/Appgame.css"
 export default function Appgame(){
-     const navigate = useNavigate();
+    const navigate = useNavigate();
     return(
     <div id="menuappgame">
         <h1>ברוכים הבאים למשחק החידות</h1>
